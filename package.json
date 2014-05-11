@@ -38,7 +38,10 @@
     "docpad-plugin-partials": "~2.8.1",
     "docpad-plugin-raw": "~2.3.2",
     "docpad-plugin-stylus": "~2.5.0",
-    "docpad-plugin-feedr": "^2.7.0"
+    "docpad-plugin-feedr": "^2.7.0",
+    "uglifyify": "^2.1.1",
+    "geojson-mapify": "^0.1.0",
+    "docpad-plugin-browserifybundles": "^2.0.0"
   },
   "devDependencies": {
     "docpad-plugin-livereload": "~2.6.0"

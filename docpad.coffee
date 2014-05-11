@@ -185,6 +185,7 @@ docpadConfig = {
 				'/vendor/normalize.css'
 				'/vendor/h5bp.css'
 				'/styles/style.css'
+				'/styles/leaflet.css'
 			]
 
 			# The website's scripts
@@ -198,6 +199,7 @@ docpadConfig = {
 				'/vendor/modernizr.js'
 				'/vendor/retina.js'
 				'/scripts/script.js'
+				'/scripts/bundle.js'
 			]
 
 
@@ -235,8 +237,30 @@ docpadConfig = {
 						result['gittip_'+name] = {url:"https://www.gittip.com/#{name}/public.json", parse:'json'}
 					for name in githubNames
 						result['github_members_'+name] = {url:"https://api.github.com/orgs/#{name}/public_members", parse:'json'}
+					result['community.geojson'] = {url:"https://raw.githubusercontent.com/bevry/meta/master/community.geojson", parse:'json'}
 					result
 				)()
+
+		browserifybundles:
+			bundles: [{
+				arguments: ['-g', 'uglifyify']
+				entry: 'scripts/index.js'
+				out: 'scripts/bundle.js'
+			}],
+			environments:
+				development:
+					bundles: [{
+						arguments: ['-d']
+						entry: 'scripts/index.js'
+						out: 'scripts/bundle.js'
+					}]
+
+		raw:
+			'leaflet-images':
+				command: ['cp', '-r', 'node_modules/geojson-mapify/node_modules/leaflet/dist/images', 'out/images/leaflet']
+			'leaflet-css':
+				command: ['cp', 'node_modules/geojson-mapify/node_modules/leaflet/dist/leaflet.css', 'out/styles']
+
 
 
 	# =================================
